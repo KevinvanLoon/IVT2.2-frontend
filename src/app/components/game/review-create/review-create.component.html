@@ -1,0 +1,32 @@
+<mat-error *ngIf="!createSucceeded">
+  <p>{{responseMessage}}</p>
+</mat-error>
+
+<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <input type="text" id="title" matInput placeholder="Title of review" formControlName="title" required>
+    </mat-form-field>
+    <mat-error *ngIf="!reviewForm.get('title').valid && reviewForm.get('title').touched" class="help-block">
+      Title is required</mat-error>
+    <br>
+    <mat-form-field class="example-full-width">
+      <input type="text" id="description" matInput placeholder="Description of review" formControlName="description"
+        >
+    </mat-form-field>
+    <mat-error *ngIf="!reviewForm.get('description').valid && reviewForm.get('description').touched" class="help-block">
+        Description is required
+    </mat-error>
+
+    <br>
+    <mat-form-field class="example-full-width">
+      <input type="number" id="stars" matInput placeholder="Stars of review" formControlName="stars"
+        required>
+    </mat-form-field>
+    <mat-error *ngIf="!reviewForm.get('stars').valid  && reviewForm.get('stars').touched" class="help-block">
+        Stars is required and must be between 1 and 5
+    </mat-error>
+    <br>
+  </div>
+  <button [disabled]="!reviewForm.valid" class="btn btn-primary center-block" type="submit">Submit</button>
+</form>

@@ -1,0 +1,31 @@
+<mat-error *ngIf="!deleteSucceeded">
+    <p>{{errorMessage}}</p>
+</mat-error>
+
+
+<mat-card *ngIf="developer">
+    <mat-card-header>
+        <mat-card-title>{{developer.name}}</mat-card-title>
+        <mat-card-subtitle>{{developer.description}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>    
+        <div *ngIf="games?.length > 0">
+            <table>
+                <thead>
+                    <th><b>Games from this developer</b></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let game of games">
+                        <td>{{game.title}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </mat-card-content>
+    <mat-card-actions *ngIf="isAuthorized">
+        <button mat-stroked-button [color]="'success'" *ngIf="developer" type="button" routerLink='edit'>Edit</button>
+        <button mat-stroked-button [color]="'success'" *ngIf="developer" type="button" (click)="onDeveloperDelete()">Delete</button>
+    </mat-card-actions>
+</mat-card>

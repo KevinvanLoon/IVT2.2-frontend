@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-8">
+    <h2>List of games</h2>
+  </div>
+  <div class="col">
+    <button type="button" class="btn btn-success float-right" routerLink='new'>New Game</button>
+  </div>
+</div>
+
+<div *ngIf="games" class="row">
+<table class="table">
+  <thead>
+    <th>Idx</th>
+    <th>Title</th>
+    <th>Developer</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let game of games; let i = index"
+    app-game-item
+    [selectedGame] = "game"
+    [index] = "i">
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div *ngIf="!games">
+<p>No games found. Loading...</p>
+</div>

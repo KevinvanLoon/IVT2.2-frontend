@@ -1,0 +1,43 @@
+<mat-error *ngIf="!createSucceeded">
+  <p>{{responseMessage}}</p>
+</mat-error>
+
+<div *ngIf="!editMode">
+  <p>Create game</p>
+</div>
+
+<div *ngIf="editMode">
+  <p>Edit game</p>
+</div>
+
+
+<form  [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <input type="text" id="title" matInput placeholder="Title of game" formControlName="title" required>
+    </mat-form-field>
+    <mat-error *ngIf="!gameForm.get('title').valid && gameForm.get('title').touched" class="help-block">
+      Title is required</mat-error>
+    <br>
+    <mat-form-field class="example-full-width">
+      <input type="text" id="description" matInput placeholder="Description of game" formControlName="description"
+        required>
+    </mat-form-field>
+    <mat-error *ngIf="!gameForm.get('description').valid && gameForm.get('description').touched" class="help-block">
+      Description is required</mat-error>
+
+    <br>
+    <div *ngIf="!editMode">
+      <mat-form-field>
+          <mat-select placeholder="Pick developer" formControlName="developer">
+           <mat-option *ngFor="let developer of developers" [value]="developer.name"> {{ developer.name }} </mat-option>
+
+          </mat-select>
+          <mat-hint>Here's a list of developers that you created</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <br>
+  </div>
+  <button [disabled]="!gameForm.valid" class="btn btn-primary center-block" type="submit">Create</button>
+</form>

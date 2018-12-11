@@ -1,0 +1,70 @@
+/*!
+ * Start Bootstrap - Freelancer v5.0.0 (https://startbootstrap.com/template-overviews/freelancer)
+ * Copyright 2013-2018 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
+ */
+
+ body {
+    font-family: 'Lato';
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    font-family: 'Montserrat';
+  }
+  
+  section {
+    padding: 6rem 0;
+  }
+  
+  section h2 {
+    font-size: 2.25rem;
+    line-height: 2rem;
+  }
+  
+  @media (min-width: 992px) {
+    section h2 {
+      font-size: 3rem;
+      line-height: 2.5rem;
+    }
+  }
+  
+  
+  header.masthead {
+    padding-top: calc(6rem + 72px);
+    padding-bottom: 6rem;
+  }
+  
+  header.masthead h1 {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+  
+  header.masthead h2 {
+    font-size: 1.3rem;
+    font-family: 'Lato';
+  }
+  
+  @media (min-width: 992px) {
+    header.masthead {
+      padding-top: calc(6rem + 106px);
+      padding-bottom: 6rem;
+    }
+    header.masthead h1 {
+      font-size: 4.75em;
+      line-height: 4rem;
+    }
+    header.masthead h2 {
+      font-size: 1.75em;
+    }
+  }
+  
+  .bg-primary {
+    background-color:#D0EAF0 !important;
+  }
+  

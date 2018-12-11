@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+    background-color:#D0EAF0 !important;
+    font-family: 'Montserrat';
+
+    
+}
+a,
+td,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 200;
+    font-family: 'Montserrat';
+}
+
+th {
+    font-weight: 400;
+    font-family: 'Montserrat';
+}
+
+.mat-success {
+    background-color: #D0EAF0;
+}

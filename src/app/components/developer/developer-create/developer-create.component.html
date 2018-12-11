@@ -1,0 +1,35 @@
+<mat-error *ngIf="!createSucceeded">
+  <p>{{responseMessage}}</p>
+</mat-error>
+
+<div *ngIf="!editMode">
+  <p>Create developer</p>
+</div>
+
+<div *ngIf="editMode">
+    <p>Edit developer</p>
+  </div>
+
+<form [formGroup]="developerForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+        <input type="text" id="name" matInput placeholder="Name of developer" formControlName="name" required>
+    </mat-form-field>
+    <mat-error
+      *ngIf="!developerForm.get('name').valid && developerForm.get('name').touched" class="help-block">
+      Name is required</mat-error>
+      <br>
+    <mat-form-field class="example-full-width">
+        <input type="text" id="description" matInput placeholder="Description of developer" formControlName="description" required>
+    </mat-form-field> 
+    <mat-error
+    *ngIf="!developerForm.get('description').valid && developerForm.get('description').touched" class="help-block">
+     Description is required</mat-error>     
+
+      <br>
+  </div>
+  <button
+    [disabled]="!developerForm.valid"
+    class="btn btn-primary center-block"
+    type="submit">Submit</button>
+</form>

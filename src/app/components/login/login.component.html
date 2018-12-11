@@ -1,0 +1,29 @@
+<div>
+<mat-error *ngIf="loginInvalid">
+  <p>{{responseMessage}}</p>
+</mat-error>
+</div>
+
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+        <input type="text" id="username" matInput placeholder="Enter your name" formControlName="username" required>
+    </mat-form-field>
+    <mat-error
+      *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched" class="help-block">
+      Username required</mat-error>
+
+    <mat-form-field class="example-full-width">
+        <input type="password" id="password" matInput placeholder="Enter your password" formControlName="password" required>
+    </mat-form-field> 
+    <mat-error
+    *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched" class="help-block">
+    Password required</mat-error>     
+
+
+  </div>
+  <button
+    [disabled]="!loginForm.valid"
+    class="btn btn-primary center-block"
+    type="submit">Login</button>
+  </form>
