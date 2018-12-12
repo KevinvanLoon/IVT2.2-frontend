@@ -1,8 +1,9 @@
+import { MatSnackBar } from '@angular/material';
 import { AuthService } from './../../../services/auth.service';
 import { Game } from './../../game/game.model';
 import { DeveloperService } from './../developer.service';
 import { Developer } from './../developer.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, tap, switchMap } from 'rxjs/operators';
 import { GameService } from '../../game/game.service';
@@ -12,7 +13,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './developer-detail.component.html',
   styleUrls: ['./developer-detail.component.css']
 })
-export class DeveloperDetailComponent implements OnInit {
+export class DeveloperDetailComponent implements OnInit{
 
 
   developer: Developer;
@@ -29,7 +30,8 @@ export class DeveloperDetailComponent implements OnInit {
     private developerService: DeveloperService,
     private gameService: GameService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public snackBar : MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -62,7 +64,6 @@ export class DeveloperDetailComponent implements OnInit {
   })
 }
 
-
   onDeveloperDelete() {
   
       this.developerService.deleteDeveloper(this.id).subscribe(
@@ -74,7 +75,13 @@ export class DeveloperDetailComponent implements OnInit {
           this.deleteSucceeded = false;
           const error = JSON.parse(err._body)
           const errormessage = error.error;
-          this.errorMessage = JSON.stringify(errormessage)
+          const errors = JSON.stringify(error.error);
+          
+          this.snackBar.open(errors, 'close', {
+            duration: 2000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center'
+          })
         }
       )
   }

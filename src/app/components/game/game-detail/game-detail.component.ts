@@ -2,7 +2,7 @@ import { Review } from './../review.model';
 import { AuthService } from './../../../services/auth.service';
 import { GameService } from './../game.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Game } from '../game.model';
 import { filter, map, tap, switchMap } from 'rxjs/operators';
 import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -52,6 +52,8 @@ export class GameDetailComponent implements OnInit {
     });
     
   }
+
+
 
   
   onGameDelete(){

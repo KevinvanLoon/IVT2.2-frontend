@@ -12,6 +12,7 @@ import { GameService } from '../game.service';
 export class GameListComponent implements OnInit {
 
   games: Game[];
+  backupGames : Game[];
   subscription: Subscription;
   constructor(
     private router: Router,
@@ -23,9 +24,14 @@ export class GameListComponent implements OnInit {
     .subscribe(
       (games: Game[]) => {
         this.games = games;
+        this.backupGames = games;
       }
     );
     this.games = this.gameService.getGames();
+    this.backupGames = this.gameService.getGames();
+    
   }
+
+
 
 }

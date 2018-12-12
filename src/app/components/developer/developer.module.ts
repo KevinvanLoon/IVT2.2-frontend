@@ -1,4 +1,7 @@
 import { NgModule } from '@angular/core';
+
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +24,7 @@ import { MaterialModule } from './../../material.module';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatSnackBarModule,
     HttpModule,
     NgbModule,  
     DeveloperRoutingModule 

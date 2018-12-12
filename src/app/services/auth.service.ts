@@ -13,7 +13,7 @@ export class AuthService {
     loggedIn = new Subject<boolean>();
     constructor(private httpClient: HttpClient) { }
 
-    login(username:string,password:string):Observable<any> {
+    login(username:string,password:string):Observable<boolean> {
 
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         let body = { 'username': username, 'password': password}
