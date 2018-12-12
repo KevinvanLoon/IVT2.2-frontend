@@ -20,15 +20,12 @@ export class DeveloperCreateComponent implements OnInit {
   createSucceeded: boolean;
   responseMessage: string;
 
-  constructor(private fb: FormBuilder,
+  constructor(
     private authService:AuthService,
     private developerService: DeveloperService,
     private router: Router,
     private route: ActivatedRoute, ) {
-    // this.developerForm = this.fb.group({
-    //   name: ['', [Validators.required]],
-    //   description: ['', [Validators.required]],
-    // })
+
   }
   ngOnInit() {
     this.editMode = this.route.snapshot.data['userAlreadyExists'] || false;
