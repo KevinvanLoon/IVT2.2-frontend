@@ -31,6 +31,11 @@ export class GameCreateComponent implements OnInit {
 
   ngOnInit() {
     this.editMode = this.route.snapshot.data['userAlreadyExists'] || false;
+    this.gameForm = new FormGroup({
+      'title': new FormControl(null, [Validators.required]),
+      'description': new FormControl(null, [Validators.required]),
+      'developer': new FormControl(null),
+    })
 
     if (this.editMode) {
       this.route.params.subscribe((params) => {
@@ -39,6 +44,14 @@ export class GameCreateComponent implements OnInit {
             if (developersAvailable) {
               this.id = +params['id'];
               this.game = this.gameService.getGame(this.id);
+              console.log(this.game)
+              if(this.game != null){
+                this.gameForm.setValue({
+                  title: this.game.title,
+                  description: this.game.description,
+                  developer: this.game.developer.name
+                })
+              } 
             }
           })
         }
@@ -58,11 +71,6 @@ export class GameCreateComponent implements OnInit {
       })
     }
 
-    this.gameForm = new FormGroup({
-      'title': new FormControl(null, [Validators.required]),
-      'description': new FormControl(null, [Validators.required]),
-      'developer': new FormControl(null),
-    })
   }
 
   onSubmit() {

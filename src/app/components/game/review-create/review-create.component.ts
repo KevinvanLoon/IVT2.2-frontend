@@ -1,3 +1,4 @@
+import { Review } from './../review.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
@@ -15,7 +16,7 @@ export class ReviewCreateComponent implements OnInit {
   constructor(
     private gameService: GameService,
     private developerService: DeveloperService,
-    private authService : AuthService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute) { }
 
@@ -23,35 +24,59 @@ export class ReviewCreateComponent implements OnInit {
   createSucceeded: boolean;
   responseMessage: string;
   gameIndex: number;
-  editMode : boolean;
-  reviewId : string;
-  
+  editMode: boolean;
+  reviewId: string;
+  title: string;
+
 
 
   ngOnInit() {
 
-    
+
     this.editMode = this.route.snapshot.data['reviewAlreadyExists'] || false;
 
-      this.route.params.subscribe((params) => {
-        if(params['id']){
-          this.gameIndex = +params['id']
-        }
-        if(params['reviewid']){
-          this.reviewId = params['reviewid']
-        }
-      })
-    
-
+    if (this.editMode) {
+      this.title = "Edit review"
+    } else { this.title = "Create review" }
     this.reviewForm = new FormGroup({
       'title': new FormControl(null, [Validators.required]),
       'description': new FormControl(null, [Validators.required]),
-      'stars' : new FormControl(null, [
+      'stars': new FormControl(null, [
         Validators.required,
         Validators.max(5),
         Validators.min(1),
-        Validators.pattern("^[0-9]*$")],)
+        Validators.pattern("^[0-9]*$")])
     })
+    this.route.params.subscribe((params) => {
+      if (params['id']) {
+        this.gameIndex = +params['id']
+      }
+      if (params['reviewid']) {
+        this.reviewId = params['reviewid']
+      }
+
+      if (this.editMode) {
+        console.log(this.gameIndex)
+        this.gameService.gamesAvailable.subscribe((ava) => {
+          if (ava) {
+            let game = this.gameService.getGame(this.gameIndex);
+            console.log(game)
+            const review = game.reviews.filter(r => r._id == this.reviewId);
+
+            if (review[0] != null) {
+              this.reviewForm.setValue({
+                title: review[0].title,
+                stars: review[0].stars,
+                description: review[0].description
+              })
+            }
+          }
+
+        })
+
+      }
+    })
+
   }
 
   onSubmit() {
@@ -59,9 +84,9 @@ export class ReviewCreateComponent implements OnInit {
     const description = this.reviewForm.value['description'];
     const stars = this.reviewForm.value['stars'];
     const authorId = this.authService.user.id;
-    
-    if(!this.editMode){
-      this.gameService.createReview(this.gameIndex,title,description,stars,authorId).subscribe(
+
+    if (!this.editMode) {
+      this.gameService.createReview(this.gameIndex, title, description, stars, authorId).subscribe(
         (res) => {
           this.createSucceeded = true;
           this.router.navigate([`/games/${this.gameIndex}`])
@@ -74,13 +99,13 @@ export class ReviewCreateComponent implements OnInit {
           this.responseMessage = JSON.stringify(errormessage);
         })
     }
-    else{
-      this.gameService.updateReview(this.gameIndex, this.reviewId, title,description,stars,authorId).subscribe(
+    else {
+      this.gameService.updateReview(this.gameIndex, this.reviewId, title, description, stars, authorId).subscribe(
         (res) => {
           console.log('in res update')
           this.createSucceeded = true;
           this.router.navigate([`/games/${this.gameIndex}`])
-          
+
         },
         (err) => {
           console.log('in res err')
@@ -90,6 +115,6 @@ export class ReviewCreateComponent implements OnInit {
           this.responseMessage = JSON.stringify(errormessage);
         })
     }
- 
+
   }
 }

@@ -15,11 +15,11 @@
        
     </mat-card-content>
     <mat-card-actions *ngIf="isAuthorized">
-        <button *ngIf="game" type="button" mat-stroked-button [color]="'success'" routerLink='edit'>Edit</button>
-        <button *ngIf="game" type="button" mat-stroked-button [color]="'success'"(click)="onGameDelete()">Delete</button>
+        <button  class="btn btn-warning"  *ngIf="game" type="button" routerLink='edit'>Edit</button>
+        <button   class="btn btn-danger"  *ngIf="game" type="button" (click)="onGameDelete()">Delete</button>
     </mat-card-actions>
 
-    <hr>
+    <hr style="background-color:white">
 
     <div class="container">
         <div class="row">
@@ -27,7 +27,7 @@
                 <p>Reviews</p>
             </div>
             <div class="col-sm">
-                <button type="button" class="btn btn-success float-right" routerLink='review/new'>+</button>
+                <button style="background-color: #18BC9C" type="button" class="btn btn-success float-right" routerLink='review/new'>+</button>
             </div>
         </div>
     </div>
@@ -35,20 +35,22 @@
 
     <br>
     <mat-accordion>
-        <mat-expansion-panel *ngFor="let review of game.reviews">
+        <mat-expansion-panel *ngFor="let review of game.reviews" style="background-color:#18BC9C">
             <mat-expansion-panel-header>
-                <mat-panel-title>
+                <mat-panel-title style="color:white; font-weight:700;">
                     {{review.title}}
                 </mat-panel-title>
+                <div style = "float:right">
                 <mat-panel-description>
-                    {{review.stars}} stars
+                    <ngb-rating style=color:white class='stars' [(rate)]="review.stars" ></ngb-rating>        
                 </mat-panel-description>
+                </div>
             </mat-expansion-panel-header>
             <p>{{review.description}}</p>
             
             <div *ngIf="review.author == currentUser">              
-                <button *ngIf="game"mat-stroked-button [color]="'success'" [routerLink]="['review',review._id, 'edit']">Edit</button>
-                <button *ngIf="game" mat-stroked-button [color]="'success'" (click)="onReviewDelete(review)">Delete</button>
+                <button class="btn btn-warning" *ngIf="game" [routerLink]="['review',review._id, 'edit']">Edit</button>
+                <button  class="btn btn-danger" *ngIf="game"  (click)="onReviewDelete(review)">Delete</button>
             </div>
         </mat-expansion-panel>
     </mat-accordion>

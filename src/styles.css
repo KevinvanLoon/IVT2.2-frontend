@@ -2,12 +2,17 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 body {
-    background-color:#D0EAF0 !important;
     font-family: 'Montserrat';
+    background-color: #18BC9C;
 
     
 }
-a,
+p,
+thead,
+tbody,
+li,
+ul,
+tr,
 td,
 h1,
 h2,
@@ -15,15 +20,43 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 200;
+    color: white;
+    font-weight: 700;
     font-family: 'Montserrat';
 }
 
+a {
+    color:#2C3E50;
+}
 th {
     font-weight: 400;
     font-family: 'Montserrat';
 }
 
 .mat-success {
-    background-color: #D0EAF0;
+    background-color: #2C3E50;
+    font-weight: 400;
+    font-family: 'Montserrat';
+}
+.mat-panel-description {
+    float: right;
+}
+
+.mat-card{
+    background-color:#2C3E50;
+    
+}
+#white,
+button,
+.mat-accordion,
+.mat-expansion-panel,
+.mat-card,
+.mat-panel-title,
+.mat-card-subtitle,
+.mat-accordion,
+.mat-expansion-panel{
+    font-weight: 700;
+    font-size: medium;
+    color: white;
+    font-family: 'Montserrat';
 }

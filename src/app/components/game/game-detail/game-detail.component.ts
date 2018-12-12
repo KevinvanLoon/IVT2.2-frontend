@@ -5,10 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Game } from '../game.model';
 import { filter, map, tap, switchMap } from 'rxjs/operators';
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-game-detail',
   templateUrl: './game-detail.component.html',
-  styleUrls: ['./game-detail.component.css']
+  styles: []
 })
 export class GameDetailComponent implements OnInit {
 
@@ -18,13 +19,14 @@ export class GameDetailComponent implements OnInit {
   errorMessage : string
   isAuthorized : boolean
   currentUser : string
-
+  currentRate = 8;
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
     private authService : AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    config: NgbRatingConfig
+  ) { config.max = 5; config.readonly = true }
 
   ngOnInit() {
    

@@ -19,8 +19,8 @@
     <mat-error *ngIf="!gameForm.get('title').valid && gameForm.get('title').touched" class="help-block">
       Title is required</mat-error>
     <br>
-    <mat-form-field class="example-full-width">
-      <input type="text" id="description" matInput placeholder="Description of game" formControlName="description"
+    <mat-form-field class="example-container">
+      <input type="text" style="size: 300" id="description" matInput placeholder="Description of game" formControlName="description"
         required>
     </mat-form-field>
     <mat-error *ngIf="!gameForm.get('description').valid && gameForm.get('description').touched" class="help-block">

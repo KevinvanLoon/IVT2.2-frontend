@@ -32,7 +32,10 @@ export class DeveloperCreateComponent implements OnInit {
   }
   ngOnInit() {
     this.editMode = this.route.snapshot.data['userAlreadyExists'] || false;
-
+    this.developerForm = new FormGroup({
+      'name': new FormControl(null, [Validators.required]),
+      'description': new FormControl(null, [Validators.required])
+    })
     if (this.editMode) {
       this.route.params.subscribe((params) => {
         if (params['id']) {
@@ -40,15 +43,17 @@ export class DeveloperCreateComponent implements OnInit {
             if (developersAvailable) {
               this.id = +params['id'];
               this.developer = this.developerService.getDeveloper(this.id);
+              if(this.developer != null) {
+                this.developerForm.setValue({
+                  name: this.developer.name,
+                  description: this.developer.description
+                })
+              }
             }
           })
         }
       });
     }
-    this.developerForm = new FormGroup({
-      'name': new FormControl(null, [Validators.required]),
-      'description': new FormControl(null, [Validators.required])
-    })
   }
 
   onSubmit() {

@@ -17,7 +17,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let game of games">
-                        <td>{{game.title}}</td>
+                        <td style="font-weight:400">{{game.title}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -25,7 +25,7 @@
 
     </mat-card-content>
     <mat-card-actions *ngIf="isAuthorized">
-        <button mat-stroked-button [color]="'success'" *ngIf="developer" type="button" routerLink='edit'>Edit</button>
-        <button mat-stroked-button [color]="'success'" *ngIf="developer" type="button" (click)="onDeveloperDelete()">Delete</button>
+        <button  class="btn btn-warning"  *ngIf="developer" type="button" routerLink='edit'>Edit</button>
+        <button  class="btn btn-danger"  *ngIf="developer" type="button" (click)="onDeveloperDelete()">Delete</button>
     </mat-card-actions>
 </mat-card>
